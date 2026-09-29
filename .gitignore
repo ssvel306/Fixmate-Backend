@@ -1,6 +1,9 @@
 node_modules/
 .env
-.env example
+.env.example
+.FixMate_PRD.pdf
+.postman
+.POSTMAN_TESTING.md
 npm-debug.log
 .DS_Store
 *.log
