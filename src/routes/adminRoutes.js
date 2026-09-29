@@ -1,0 +1,20 @@
+import express from "express";
+import {protect} from "../middleware/authMiddleware.js";
+import {authorize} from "../middleware/roleMiddleware.js";
+import validate from "../middleware/validate.js";
+import {updateUserStatusValidator,reviewIdParamValidator} from "../validators/adminValidators.js";
+import {body} from "express-validator";
+import objectIdParam from "../validators/common.js";
+import {getUsers,getProviders,getAllServices,getAllBookings,updateUserStatus,updateServiceStatus,deleteReviewAsAdmin} from "../controllers/adminController.js";
+
+const router=express.Router();
+router.use(protect,authorize("admin"));
+router.get("/dashboard",(req,res)=>res.json({success:true,message:"Admin dashboard",data:{user:req.user}}));
+router.get("/users",getUsers);
+router.get("/providers",getProviders);
+router.get("/services",getAllServices);
+router.get("/bookings",getAllBookings);
+router.patch("/users/:id/status",updateUserStatusValidator,validate,updateUserStatus);
+router.patch("/services/:id/status",[objectIdParam("id"),body("isActive").isBoolean()],validate,updateServiceStatus);
+router.delete("/reviews/:id",reviewIdParamValidator,validate,deleteReviewAsAdmin);
+export default router;
