@@ -1,7 +1,7 @@
 node_modules/
 .env
 .env.example
-.FixMate_PRD.pdf
+.FixMate_PRD
 .postman
 .POSTMAN_TESTING.md
 npm-debug.log
